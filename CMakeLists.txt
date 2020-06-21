@@ -1,15 +1,11 @@
-if(WIN32)
-    add_library(glad
-        src/glad.c
-        src/glad_wgl.c
-    )
-elseif(APPLE)
-    add_library(glad
-        src/glad.c
-    )
-elseif(UNIX)
-    add_library(glad
-        src/glad.c
-        src/glad_glx.c
-    )
-endif()
+IF (WIN32)
+    ADD_LIBRARY (glad src/glad.c src/glad_wgl.c)
+ELSEIF(APPLE)
+    ADD_LIBRARY (glad src/glad.c)
+ELSEIF(UNIX)
+    ADD_LIBRARY (glad src/glad.c src/glad_glx.c)
+ELSE()
+    MESSAGE (FATAL_ERROR "Unsupported platform")
+ENDIF()
+
+TARGET_INCLUDE_DIRECTORIES(glad PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include/)
